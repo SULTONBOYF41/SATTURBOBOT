@@ -1,13 +1,13 @@
 // src/bot.js
-
 const { Telegraf } = require('telegraf');
 const { BOT_TOKEN } = require('./config');
-require('./db'); // DB ni init qiladi
+require('./db'); // DB init
 
 const { registerStartHandler } = require('./handlers/start');
 const { registerRefHandler } = require('./handlers/ref');
 const { registerPointsHandler } = require('./handlers/points');
 const { registerLinkHandler } = require('./handlers/link');
+const { registerBooksHandler } = require('./handlers/books');
 const { checkVipUsers } = require('./services/vipService');
 const { checkReferralActivity } = require('./services/referralMonitorService');
 
@@ -23,6 +23,12 @@ registerStartHandler(bot);
 registerRefHandler(bot);
 registerPointsHandler(bot);
 registerLinkHandler(bot);
+registerBooksHandler(bot);
+
+// Global error catcher
+bot.catch((err, ctx) => {
+    console.error('❌ Bot error:', err);
+});
 
 // 🔁 VIP userlarni har 10 daqiqada tekshirish
 const VIP_INTERVAL_MINUTES = 10;
@@ -42,16 +48,22 @@ setInterval(() => {
     checkReferralActivity(bot);
 }, REFERRAL_INTERVAL_MINUTES * 60 * 1000);
 
-// 🧪 Debug uchun – bot ishga tushgan zahoti BIR MARTA ishlatib ko'ramiz
+// Debug: bir marta ishga tushganda tekshir
 checkReferralActivity(bot);
 
 // Botni ishga tushirish
-bot.launch().then(() => {
-    console.log('🚀 Turbo Booster bot ishga tushdi...');
-    console.log(
-        `VIP monitoring interval: ${VIP_INTERVAL_MINUTES} min, Referral monitoring interval: ${REFERRAL_INTERVAL_MINUTES} min`
-    );
-});
+bot
+    .launch({ dropPendingUpdates: true })
+    .then(() => {
+        console.log('🚀 Turbo Booster bot ishga tushdi...');
+        console.log(
+            `VIP monitoring interval: ${VIP_INTERVAL_MINUTES} min, Referral monitoring interval: ${REFERRAL_INTERVAL_MINUTES} min`
+        );
+    })
+    .catch((e) => {
+        console.error('❌ bot.launch ERROR:', e);
+        process.exit(1);
+    });
 
 // graceful stop
 process.once('SIGINT', () => bot.stop('SIGINT'));

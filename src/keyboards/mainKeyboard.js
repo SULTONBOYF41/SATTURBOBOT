@@ -1,16 +1,18 @@
 const { Markup } = require('telegraf');
 
-const BUTTON_REF = '🔗 Taklif havolasi';
-const BUTTON_POINTS = '📊 Ballarim';
-const BUTTON_LINK = '🔐 VIP link';
-const BUTTON_RULES = 'ℹ️ Qoidalar';
+const BUTTON_REF = 'Taklif havolasi';
+const BUTTON_POINTS = 'Ballarim';
+const BUTTON_LINK = 'VIP link';
+const BUTTON_RULES = 'Qoidalar';
+const BUTTON_BOOKS = 'Kitoblar';
 
 const mainKeyboard = Markup.keyboard([
     [BUTTON_REF, BUTTON_POINTS],
     [BUTTON_LINK, BUTTON_RULES],
+    [BUTTON_BOOKS],
 ])
     .resize()
-    .persistent(); // klaviatura doim ko'rinib turadi
+    .persistent(); // keyboard always visible
 
 module.exports = {
     mainKeyboard,
@@ -18,4 +20,5 @@ module.exports = {
     BUTTON_POINTS,
     BUTTON_LINK,
     BUTTON_RULES,
+    BUTTON_BOOKS,
 };

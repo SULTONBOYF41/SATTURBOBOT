@@ -1,0 +1,11 @@
+SAT Matematika Asoslari
+-----------------------
+1. Kitob turi: boshlangich tayyorgarlik.
+2. Izoh: misollar, yechim strategiyalari va test savollari jamlangan.
+3. Talab: kamida 2 ball to'plagan foydalanuvchilar ushbu kitobni yuklab olishi mumkin.
+
+Uni yangilash yoki yangi kitob qo'shish uchun:
+  - `assets/books` papkasiga yangi PDF yoki TXT qo'ying.
+  - `books` jadvaliga `title`, `description`, `file_path` (masalan: assets/books/your-book.pdf),
+    `required_points` kabi ma'lumotlarni kiriting.
+  - Botni qayta ishga tushirsangiz, yangi kitoblar menyuda ko'rinadi.
