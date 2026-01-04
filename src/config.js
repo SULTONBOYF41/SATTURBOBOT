@@ -21,9 +21,9 @@ module.exports = {
     CLOSED_GROUP_ID: process.env.CLOSED_GROUP_ID,
     REQUIRED_CHANNEL_USERNAME: process.env.REQUIRED_CHANNEL_USERNAME,
 
-    // ✅ Render persistent disk uchun
+    // ✅ Render disk uchun
     DB_PATH: process.env.DB_PATH || path.join(process.cwd(), 'database.sqlite'),
 
-    // ✅ Adminlar (kitob qo‘shish uchun): "123,456"
+    // ✅ Admin IDs (kitob qo‘shish uchun)
     ADMIN_IDS: parseAdminIds(process.env.ADMIN_IDS),
 };
